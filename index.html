@@ -7,21 +7,23 @@
 <title>粤省事 · 业主投票操作指引</title>
 <style>
   :root{
-    --paper:#FDF8F1;
+    /* 稳重的蓝色系：深海军蓝做底、钢蓝做强调，冷调浅蓝灰做纸面 */
+    --paper:#F2F6FA;
     --card:#FFFFFF;
-    --ink:#1C1713;
-    --ink-soft:#57504A;
-    --ink-mute:#938A80;
-    --amber:#DE8615;
-    --amber-deep:#A9610A;
-    --amber-soft:#FBEDD6;
-    --brick:#B23A2A;
-    --brick-soft:#FCEDE9;
-    --sage:#2F6B52;
-    --sage-soft:#E8F2EC;
-    --line:#EBE0CD;
+    --ink:#16304A;
+    --ink-soft:#4C6379;
+    --ink-mute:#6E839A;
+    --blue:#2E6DA6;
+    --blue-deep:#1E4E79;
+    --blue-soft:#E5EEF7;
+    --blue-lite:#7FB0DC;   /* 深底上的浅蓝，用于首屏 */
+    --brick:#A8382A;
+    --brick-soft:#FBEDEA;
+    --teal:#1D5C6B;
+    --teal-soft:#E4F0F3;
+    --line:#DCE6F0;
     --radius:18px;
-    --shadow:0 1px 2px rgba(60,40,10,.04), 0 10px 28px -18px rgba(60,40,10,.28);
+    --shadow:0 1px 2px rgba(22,48,74,.05), 0 10px 28px -18px rgba(22,48,74,.30);
     --gutter:18px;
   }
   *{box-sizing:border-box;}
@@ -35,7 +37,7 @@
     line-height:1.75;
     letter-spacing:.01em;
     -webkit-font-smoothing:antialiased;
-    -webkit-tap-highlight-color:rgba(222,134,21,.16);
+    -webkit-tap-highlight-color:rgba(46,109,166,.16);
     overflow-x:hidden;
   }
   img{max-width:100%;}
@@ -43,7 +45,7 @@
 
   /* 键盘可达性：统一的焦点环 */
   a:focus-visible,summary:focus-visible,.shot:focus-visible,button:focus-visible{
-    outline:3px solid var(--amber);
+    outline:3px solid var(--blue);
     outline-offset:3px;
     border-radius:8px;
   }
@@ -51,7 +53,7 @@
   /* ---------- 首屏 ---------- */
   .hero{
     background:var(--ink);
-    color:#FFF8EC;
+    color:#EFF5FA;
     border-radius:0 0 26px 26px;
     /* 与 .wrap 使用同一 gutter，保证首屏文字与正文左对齐 */
     padding:34px var(--gutter) 30px;
@@ -63,7 +65,7 @@
     content:"";
     position:absolute;inset:auto -60px -90px auto;
     width:260px;height:260px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, rgba(222,134,21,.42), transparent 68%);
+    background:radial-gradient(circle at 30% 30%, rgba(80,146,204,.45), transparent 68%);
     pointer-events:none;
   }
   .hero > *{position:relative;z-index:1;}
@@ -72,8 +74,8 @@
   .eyebrow{
     display:inline-block;
     font-size:13px;font-weight:600;letter-spacing:.14em;
-    color:var(--amber);
-    border:1px solid rgba(222,134,21,.5);
+    color:var(--blue-lite);
+    border:1px solid rgba(127,176,220,.5);
     border-radius:999px;
     padding:4px 12px;
     margin-bottom:16px;
@@ -87,7 +89,7 @@
   }
   .hero .sub{
     margin:0;
-    color:#C7BCAE;
+    color:#A7BDD2;
     font-size:16px;
   }
   /* 关键信息：自动列数，窄屏 1 列、宽屏自动 2 列 */
@@ -111,7 +113,7 @@
   }
   .fact .k{
     font-size:13px;
-    color:#A99E90;
+    color:#9DB3C8;
     flex:0 0 auto;
     min-width:5em;
     margin:0;
@@ -120,11 +122,11 @@
     margin:0;
     font-size:16.5px;
     font-weight:600;
-    color:#FFF8EC;
+    color:#EFF5FA;
     flex:1 1 auto;
     min-width:0;
   }
-  .fact .v em{color:var(--amber);font-style:normal;}
+  .fact .v em{color:var(--blue-lite);font-style:normal;}
 
   /* ---------- 通用 ---------- */
   .notice{
@@ -135,15 +137,15 @@
     border:1px solid;
   }
   .notice strong{display:block;margin-bottom:4px;font-size:17px;}
-  .notice--brick{background:var(--brick-soft);border-color:#F0CFC7;color:#7A2A1C;}
-  .notice--sage{background:var(--sage-soft);border-color:#CFE3D7;color:#204A38;}
+  .notice--brick{background:var(--brick-soft);border-color:#F0CFC8;color:#7E2C1E;}
+  .notice--info{background:var(--teal-soft);border-color:#C6DFE6;color:#14454F;}
 
   h2.phase{
     display:flex;align-items:center;gap:12px;
     font-size:15px;
     letter-spacing:.1em;
     font-weight:700;
-    color:var(--amber-deep);
+    color:var(--blue-deep);
     margin:44px 0 18px;
   }
   h2.phase::after{
@@ -155,7 +157,7 @@
     display:grid;place-items:center;
     width:26px;height:26px;flex:0 0 26px;
     border-radius:50%;
-    background:var(--amber);color:#fff;
+    background:var(--blue);color:#fff;
     font-size:14px;letter-spacing:0;
   }
 
@@ -172,8 +174,8 @@
   .step-no{
     flex:0 0 34px;width:34px;height:34px;
     border-radius:11px;
-    background:var(--amber-soft);
-    color:var(--amber-deep);
+    background:var(--blue-soft);
+    color:var(--blue-deep);
     display:grid;place-items:center;
     font-weight:700;font-size:15px;
     font-variant-numeric:tabular-nums;
@@ -202,13 +204,13 @@
     margin:0;
     border-radius:14px;
     border:1px solid var(--line);
-    box-shadow:0 2px 4px rgba(60,40,10,.05), 0 18px 36px -26px rgba(60,40,10,.5);
-    background:#F3F1EE;
+    box-shadow:0 2px 4px rgba(22,48,74,.06), 0 18px 36px -26px rgba(22,48,74,.45);
+    background:#EDF2F7;
     cursor:zoom-in;
     transition:transform .25s cubic-bezier(.22,.7,.3,1), box-shadow .25s ease;
   }
   @media (hover:hover){
-    .shot:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(60,40,10,.06), 0 26px 46px -26px rgba(60,40,10,.55);}
+    .shot:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(22,48,74,.08), 0 26px 46px -26px rgba(22,48,74,.5);}
   }
   /* 放大提示放在图片下方，不覆盖在图上。
      若浮在右下角，它会压住部分截图底部的操作按钮（如「下一步」「开始办理」），
@@ -218,8 +220,8 @@
     width:max-content;
     max-width:100%;
     margin:9px auto 0;
-    background:rgba(28,23,19,.72);
-    color:#FFF3E2;
+    background:rgba(16,38,58,.78);
+    color:#EAF2FA;
     font-size:12.5px;
     line-height:1;
     padding:6px 11px;
@@ -236,7 +238,7 @@
   /* ---------- 点击放大 ---------- */
   .zoom{
     position:fixed;inset:0;z-index:120;
-    background:rgba(18,13,9,.93);
+    background:rgba(10,22,36,.94);
     display:none;
     align-items:center;justify-content:center;
     padding:16px;
@@ -252,7 +254,7 @@
   }
   .zoom .cap{
     position:absolute;left:0;right:0;bottom:14px;
-    text-align:center;color:#D8CDBD;font-size:14px;
+    text-align:center;color:#CFDCE8;font-size:14px;
     padding:0 20px;
   }
   .zoom .close{
@@ -291,7 +293,7 @@
     content:"";
     position:absolute;left:2px;top:.62em;
     width:6px;height:6px;border-radius:50%;
-    background:var(--amber);
+    background:var(--blue);
   }
   ul.list li b{color:var(--ink);font-weight:600;}
 
@@ -302,7 +304,7 @@
     margin-bottom:10px;
     overflow:hidden;
   }
-  details.faq[open]{border-color:#E0CFB2;}
+  details.faq[open]{border-color:#BBD3E7;}
   details.faq summary{
     cursor:pointer;
     list-style:none;
@@ -317,8 +319,8 @@
     content:"";
     position:absolute;right:19px;top:50%;
     width:8px;height:8px;
-    border-right:2px solid var(--amber);
-    border-bottom:2px solid var(--amber);
+    border-right:2px solid var(--blue);
+    border-bottom:2px solid var(--blue);
     transform:translateY(-70%) rotate(45deg);
     transition:transform .22s ease;
   }
@@ -445,7 +447,7 @@
     在 9 月 15 日 10:00 之前进入，议题列表会显示「没有查询到记录」，属正常现象，不必担心。
   </div>
 
-  <div class="notice notice--sage reveal">
+  <div class="notice notice--info reveal">
     <strong>一句话看懂 · 图中红框就是要点的位置</strong>
     微信打开粤省事并确认城市是「惠州」→ 搜索「业主」→ 点开「业主投票决议」→ 刷脸认证 → 点「开始投票」→ 在「进行中」里选择你认可的物业服务企业并提交。<b>每张截图都可以点击放大</b>，看不清时点开看。
   </div>
@@ -601,12 +603,12 @@
         <span class="step-no">11</span>
         <h3 class="step-title">在「进行中」里选择你认可的物业企业</h3>
       </div>
-      <p class="step-desc">进入议题列表，分为「<b>进行中</b>」和「<b>已结束</b>」两个页签。投票开放前「进行中」为 0 项，显示「没有查询到记录」；<b>9 月 15 日 10:00 以后</b>，本次议题就会出现在「进行中」页签下。<b>点开议题，选择你心仪的物业服务企业，按页面提示提交即可。</b></p>
+      <p class="step-desc">进入后是「业主投票决议」的<b>议题列表页</b>，上方有「<b>进行中</b>」和「<b>已结束</b>」两个页签。投票开放前，<b>「进行中」显示 0 项、页面写着「没有查询到记录」，这是正常的</b>。<b>9 月 15 日 10:00 以后</b>，本次议题就会出现在「进行中」页签下——<b>点开议题，选择你心仪的物业服务企业，按页面提示提交即可</b>。若届时仍查不到议题，列表上方有一行「如无法查询到您的投票议题，请点击这里」，点它按提示处理。</p>
       <div class="shot-box">
         <img class="shot" loading="lazy" decoding="async" src="11_议题列表页_进行中0项暂无记录.jpg" alt="议题列表进行中暂无记录" width="576" height="1024">
         <span class="zoom-hint">点击放大</span>
       </div>
-      <p class="shot-note">开放前为空，属正常</p>
+      <p class="shot-note">此图为开放前的状态：进行中 0 项、已结束 2 项</p>
     </article>
 
   </div>
