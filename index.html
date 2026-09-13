@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>粤省事 · 业主投票操作指引</title>
+<style>
+  :root{
+    --paper:#FDF8F1;
+    --card:#FFFFFF;
+    --ink:#1C1713;
+    --ink-soft:#57504A;
+    --ink-mute:#938A80;
+    --amber:#DE8615;
+    --amber-deep:#A9610A;
+    --amber-soft:#FBEDD6;
+    --brick:#B23A2A;
+    --brick-soft:#FCEDE9;
+    --sage:#2F6B52;
+    --sage-soft:#E8F2EC;
+    --line:#EBE0CD;
+    --radius:18px;
+    --shadow:0 1px 2px rgba(60,40,10,.04), 0 10px 28px -18px rgba(60,40,10,.28);
+    --gutter:18px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif;
+    font-size:17.5px;
+    line-height:1.75;
+    letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:rgba(222,134,21,.16);
+    overflow-x:hidden;
+  }
+  img{max-width:100%;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 var(--gutter) 72px;}
+
+  /* 键盘可达性：统一的焦点环 */
+  a:focus-visible,summary:focus-visible,.shot:focus-visible,button:focus-visible{
+    outline:3px solid var(--amber);
+    outline-offset:3px;
+    border-radius:8px;
+  }
+
+  /* ---------- 首屏 ---------- */
+  .hero{
+    background:var(--ink);
+    color:#FFF8EC;
+    border-radius:0 0 26px 26px;
+    /* 与 .wrap 使用同一 gutter，保证首屏文字与正文左对齐 */
+    padding:34px var(--gutter) 30px;
+    margin:0 0 26px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;inset:auto -60px -90px auto;
+    width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(222,134,21,.42), transparent 68%);
+    pointer-events:none;
+  }
+  .hero > *{position:relative;z-index:1;}
+  /* 与 .wrap 的内容宽度一致（920 减去两侧 gutter），确保首屏与正文左对齐 */
+  .hero-inner{max-width:calc(920px - var(--gutter) * 2);margin:0 auto;}
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;font-weight:600;letter-spacing:.14em;
+    color:var(--amber);
+    border:1px solid rgba(222,134,21,.5);
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:16px;
+  }
+  .hero h1{
+    margin:0 0 10px;
+    font-size:30px;
+    line-height:1.28;
+    letter-spacing:-.01em;
+    font-weight:700;
+  }
+  .hero .sub{
+    margin:0;
+    color:#C7BCAE;
+    font-size:16px;
+  }
+  /* 关键信息：自动列数，窄屏 1 列、宽屏自动 2 列 */
+  .facts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:10px;
+    margin-top:22px;
+    list-style:none;
+    padding:0;
+  }
+  .fact{
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+    padding:11px 14px;
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    flex-wrap:wrap;
+  }
+  .fact .k{
+    font-size:13px;
+    color:#A99E90;
+    flex:0 0 auto;
+    min-width:5em;
+    margin:0;
+  }
+  .fact .v{
+    margin:0;
+    font-size:16.5px;
+    font-weight:600;
+    color:#FFF8EC;
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .fact .v em{color:var(--amber);font-style:normal;}
+
+  /* ---------- 通用 ---------- */
+  .notice{
+    border-radius:var(--radius);
+    padding:16px 18px;
+    margin:0 0 26px;
+    font-size:16.5px;
+    border:1px solid;
+  }
+  .notice strong{display:block;margin-bottom:4px;font-size:17px;}
+  .notice--brick{background:var(--brick-soft);border-color:#F0CFC7;color:#7A2A1C;}
+  .notice--sage{background:var(--sage-soft);border-color:#CFE3D7;color:#204A38;}
+
+  h2.phase{
+    display:flex;align-items:center;gap:12px;
+    font-size:15px;
+    letter-spacing:.1em;
+    font-weight:700;
+    color:var(--amber-deep);
+    margin:44px 0 18px;
+  }
+  h2.phase::after{
+    content:"";
+    flex:1;height:1px;
+    background:linear-gradient(90deg,var(--line),transparent);
+  }
+  h2.phase .num{
+    display:grid;place-items:center;
+    width:26px;height:26px;flex:0 0 26px;
+    border-radius:50%;
+    background:var(--amber);color:#fff;
+    font-size:14px;letter-spacing:0;
+  }
+
+  .steps{display:grid;grid-template-columns:1fr;gap:16px;}
+  .step{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 18px;
+    box-shadow:var(--shadow);
+    min-width:0;
+  }
+  .step-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:4px;}
+  .step-no{
+    flex:0 0 34px;width:34px;height:34px;
+    border-radius:11px;
+    background:var(--amber-soft);
+    color:var(--amber-deep);
+    display:grid;place-items:center;
+    font-weight:700;font-size:15px;
+    font-variant-numeric:tabular-nums;
+  }
+  .step-title{
+    margin:5px 0 0;
+    font-size:18.5px;
+    font-weight:700;
+    line-height:1.45;
+    letter-spacing:-.005em;
+    min-width:0;
+  }
+  .step-desc{
+    margin:8px 0 16px;
+    color:var(--ink-soft);
+    font-size:16.5px;
+  }
+  .step-desc b{color:var(--ink);font-weight:600;}
+
+  /* 截图：定位基准框，宽度随容器自适应，最宽 340 */
+  .shot-box{position:relative;width:100%;max-width:340px;margin:0 auto;}
+  .shot{
+    display:block;
+    width:100%;
+    height:auto;
+    margin:0;
+    border-radius:14px;
+    border:1px solid var(--line);
+    box-shadow:0 2px 4px rgba(60,40,10,.05), 0 18px 36px -26px rgba(60,40,10,.5);
+    background:#F3F1EE;
+    cursor:zoom-in;
+    transition:transform .25s cubic-bezier(.22,.7,.3,1), box-shadow .25s ease;
+  }
+  @media (hover:hover){
+    .shot:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(60,40,10,.06), 0 26px 46px -26px rgba(60,40,10,.55);}
+  }
+  .zoom-hint{
+    position:absolute;right:10px;bottom:10px;
+    background:rgba(28,23,19,.72);
+    color:#FFF3E2;
+    font-size:12.5px;
+    line-height:1;
+    padding:6px 10px;
+    border-radius:999px;
+    pointer-events:none;
+    backdrop-filter:blur(2px);
+  }
+  .shot-note{
+    text-align:center;
+    color:var(--ink-mute);
+    font-size:14px;
+    margin:10px 0 0;
+  }
+
+  /* ---------- 点击放大 ---------- */
+  .zoom{
+    position:fixed;inset:0;z-index:120;
+    background:rgba(18,13,9,.93);
+    display:none;
+    align-items:center;justify-content:center;
+    padding:16px;
+    overscroll-behavior:contain;
+  }
+  .zoom.on{display:flex;}
+  .zoom img{
+    max-width:100%;
+    max-height:calc(100vh - 32px);
+    width:auto;
+    border-radius:12px;
+    box-shadow:0 24px 70px rgba(0,0,0,.55);
+  }
+  .zoom .cap{
+    position:absolute;left:0;right:0;bottom:14px;
+    text-align:center;color:#D8CDBD;font-size:14px;
+    padding:0 20px;
+  }
+  .zoom .close{
+    position:absolute;top:12px;right:12px;
+    width:44px;height:44px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.28);
+    background:rgba(255,255,255,.1);
+    color:#fff;font-size:22px;line-height:1;
+    display:grid;place-items:center;
+    cursor:pointer;
+  }
+  body.locked{overflow:hidden;}
+
+  /* ---------- 须知 / FAQ ---------- */
+  .panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 18px;
+    box-shadow:var(--shadow);
+  }
+  .panel + .panel{margin-top:16px;}
+  .panel h3{margin:0 0 10px;font-size:18px;font-weight:700;}
+  .panel p{margin:0 0 10px;color:var(--ink-soft);font-size:16.5px;}
+  .panel p:last-child{margin-bottom:0;}
+  ul.list{margin:0;padding-left:0;list-style:none;}
+  ul.list li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:9px;
+    color:var(--ink-soft);
+    font-size:16.5px;
+  }
+  ul.list li::before{
+    content:"";
+    position:absolute;left:2px;top:.62em;
+    width:6px;height:6px;border-radius:50%;
+    background:var(--amber);
+  }
+  ul.list li b{color:var(--ink);font-weight:600;}
+
+  details.faq{
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--card);
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  details.faq[open]{border-color:#E0CFB2;}
+  details.faq summary{
+    cursor:pointer;
+    list-style:none;
+    padding:15px 44px 15px 17px;
+    font-weight:600;
+    font-size:16.5px;
+    position:relative;
+    color:var(--ink);
+  }
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{
+    content:"";
+    position:absolute;right:19px;top:50%;
+    width:8px;height:8px;
+    border-right:2px solid var(--amber);
+    border-bottom:2px solid var(--amber);
+    transform:translateY(-70%) rotate(45deg);
+    transition:transform .22s ease;
+  }
+  details.faq[open] summary::after{transform:translateY(-30%) rotate(-135deg);}
+  details.faq .body{
+    padding:14px 17px 16px;
+    color:var(--ink-soft);
+    font-size:16.5px;
+    border-top:1px solid var(--line);
+  }
+  details.faq .body b{color:var(--ink);font-weight:600;}
+
+  .kv{display:grid;gap:10px;}
+  .kv .row{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;}
+  .kv .k{flex:0 0 5.5em;color:var(--ink-mute);font-size:15px;min-width:5.5em;}
+  .kv .v{flex:1 1 200px;font-size:16px;color:var(--ink);min-width:0;}
+
+  footer.foot{
+    margin-top:38px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    color:var(--ink-mute);
+    font-size:14.5px;
+    line-height:1.85;
+  }
+  footer.foot b{color:var(--ink-soft);font-weight:600;}
+
+  /* ---------- 动效 ---------- */
+  .reveal{opacity:0;transform:translateY(14px);}
+  .reveal.in{opacity:1;transform:none;transition:opacity .55s ease, transform .55s cubic-bezier(.22,.7,.3,1);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal,.reveal.in{opacity:1;transform:none;transition:none;}
+    details.faq summary::after,.shot{transition:none;}
+  }
+
+  /* ================= 断点 ================= */
+
+  /* 小手机（iPhone SE 等） */
+  @media (max-width:400px){
+    :root{--gutter:14px;}
+    body{font-size:17px;}
+    .hero{padding:28px var(--gutter) 26px;}
+    .hero h1{font-size:26px;}
+    .step{padding:16px 14px;}
+    .step-title{font-size:17.5px;}
+    .zoom-hint{right:10px;bottom:8px;}
+  }
+
+  /* 平板竖屏及以上：步骤两栏 */
+  @media (min-width:760px){
+    :root{--gutter:28px;}
+    body{font-size:18px;}
+    .hero{padding:46px var(--gutter) 38px;border-radius:0 0 30px 30px;}
+    .hero h1{font-size:38px;}
+    .hero .sub{font-size:17px;}
+    .steps{grid-template-columns:1fr 1fr;gap:20px;}
+    h2.phase{margin-top:56px;font-size:16px;}
+    .shot-box{max-width:300px;}
+    .panel{padding:26px;}
+    .step{padding:24px 22px;}
+    .step-desc{font-size:17px;}
+    .notice{font-size:17px;}
+    ul.list li,.panel p,details.faq summary,details.faq .body{font-size:17px;}
+  }
+
+  /* 宽屏：截图稍收窄，阅读栏不失控 */
+  @media (min-width:1100px){
+    .hero h1{font-size:42px;}
+    .shot-box{max-width:310px;}
+  }
+
+  /* 横屏矮视口：首屏收紧，避免把内容推出屏幕 */
+  @media (orientation:landscape) and (max-height:520px){
+    .hero{padding:22px 20px 20px;}
+    .hero h1{font-size:26px;}
+    .facts{margin-top:14px;}
+    .fact{padding:8px 12px;}
+  }
+
+  /* ---------- 打印 ---------- */
+  @media print{
+    :root{--gutter:0px;}
+    body{background:#fff;font-size:11.5pt;}
+    .hero{background:#fff;color:#000;border:1px solid #999;border-radius:0;margin:0 0 18px;}
+    .hero h1{color:#000;font-size:22pt;}
+    .hero .sub,.fact .k{color:#333;}
+    .hero::after{display:none;}
+    .fact{border-color:#bbb;background:#fff;}
+    .fact .v{color:#000;}
+    .fact .v em{color:#000;}
+    .eyebrow{color:#000;border-color:#999;}
+    .facts{grid-template-columns:1fr 1fr;}
+    .steps{grid-template-columns:1fr 1fr;gap:14px;}
+    .step,.panel,details.faq{box-shadow:none;border-color:#ccc;break-inside:avoid;}
+    .reveal{opacity:1;transform:none;}
+    .zoom-hint,.zoom{display:none !important;}
+    details.faq .body{display:block !important;}
+    details.faq summary::after{display:none;}
+    .shot-box{max-width:230px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">惠州市 · 业主大会电子投票</span>
+    <h1>粤省事投票操作指引</h1>
+    <p class="sub">翡翠山房小区 · 电子投票选聘物业服务企业</p>
+
+    <ul class="facts">
+      <li class="fact"><span class="k">开放时间</span><span class="v"><em>9 月 15 日 10:00</em> 起开放投票</span></li>
+      <li class="fact"><span class="k">认证方式</span><span class="v">人脸识别实名认证</span></li>
+      <li class="fact"><span class="k">操作入口</span><span class="v">微信「粤省事」小程序</span></li>
+      <li class="fact"><span class="k">投票期限</span><span class="v">有期限，逾期无法补投，建议尽快完成</span></li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="notice notice--brick reveal">
+    <strong>请务必在投票通道开放后再进行</strong>
+    在 9 月 15 日 10:00 之前进入，议题列表会显示「没有查询到记录」，属正常现象，不必担心。
+  </div>
+
+  <div class="notice notice--sage reveal">
+    <strong>一句话看懂 · 截图可点击放大</strong>
+    微信打开粤省事并确认城市是「惠州」→ 搜索「业主」→ 点开「业主投票决议」→ 刷脸认证 → 点「开始投票」→ 在「进行中」里选择你认可的物业服务企业并提交。
+  </div>
+
+  <!-- ================= 第一阶段 ================= -->
+  <h2 class="phase"><span class="num">1</span>找到投票入口</h2>
+  <div class="steps">
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">01</span>
+        <h3 class="step-title">打开粤省事，确认城市是「惠州」</h3>
+      </div>
+      <p class="step-desc">微信搜索并打开「粤省事」小程序。看<b>左上角</b>是否显示「<b>惠州</b>」——图中显示惠州和气温 26℃，说明定位正确。若显示其他城市，<b>点击城市名即可切换</b>。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="01_粤省事首页_定位惠州.jpg" alt="粤省事首页，左上角显示惠州" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">首页左上角显示「惠州」</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">02</span>
+        <h3 class="step-title">点搜索框，输入「业主」二字</h3>
+      </div>
+      <p class="step-desc">点击首页的搜索输入栏，跳转到搜索页面，输入「<b>业主</b>」，下方立即出现「<b>业主投票决议</b>」。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="02_搜索业主_出现业主投票决议入口.jpg" alt="搜索页输入业主" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">输入「业主」即出现结果</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">03</span>
+        <h3 class="step-title">认准「业主投票决议」，点击进入</h3>
+      </div>
+      <p class="step-desc">结果列表在「服务」分类下。<b>请认准第一项「业主投票决议」</b>，其下方标注为「<b>住房置业</b>」。另两项带「公积金」字样，与本次投票无关，不要点错。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="03_搜索结果_点击业主投票决议.jpg" alt="搜索结果列表" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">第一项归属「住房置业」</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">04</span>
+        <h3 class="step-title">弹出提示，点「确定」</h3>
+      </div>
+      <p class="step-desc">系统弹出提示「<b>本次操作需要您进行登录验证</b>」，这是正常的实名核验环节，点击「<b>确定</b>」继续。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="04_登录身份验证确认.jpg" alt="登录验证提示弹窗" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">点击「确定」进入登录</p>
+    </article>
+
+  </div>
+
+  <!-- ================= 第二阶段 ================= -->
+  <h2 class="phase"><span class="num">2</span>完成实名认证</h2>
+  <div class="steps">
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">05</span>
+        <h3 class="step-title">进入「选择登录方式」</h3>
+      </div>
+      <p class="step-desc">页面出现四种登录方式，<b>默认选中第一项</b>「广东省统一身份认证」，此时下方「我同意……」的方框<b>尚未勾选</b>。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="05_选择登录方式_默认广东省统一身份认证.jpg" alt="选择登录方式默认页" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">默认选中第一项</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">06</span>
+        <h3 class="step-title">选择方式，并勾选「我同意」</h3>
+      </div>
+      <p class="step-desc">本指引以选择第二项「<b>人脸识别认证</b>」为例。<b>无论选哪种方式，最后都要刷脸</b>，选哪一项都能办成。关键是：<b>务必把下方「我同意……」的方框打上勾</b>，否则无法进行下一步。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="06_选择登录方式_改选人脸识别并勾选同意.jpg" alt="改选人脸识别并勾选同意" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">已改选并勾选同意</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">07</span>
+        <h3 class="step-title">核对证件信息，点「开始人脸识别验证」</h3>
+      </div>
+      <p class="step-desc">页面自动带出<b>证件类型、姓名、身份证号</b>（一般无需手动填写）。<b>先勾选「我同意……」方框，再点蓝色按钮「开始人脸识别验证」</b>，按屏幕提示完成刷脸。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="07_登录页_人脸识别验证填写证件信息.jpg" alt="人脸识别验证页" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">图中个人信息已作遮蔽处理</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">08</span>
+        <h3 class="step-title">授权登录，点「开始办理」</h3>
+      </div>
+      <p class="step-desc">刷脸通过后进入「<b>授权登录</b>」页。页面写明本次由「<b>惠州市住房和城乡建设局</b>」提供服务，需提供姓名、证件信息、手机号码用于核验身份。确认后点击「<b>开始办理</b>」。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="08_授权登录页_点击开始办理.jpg" alt="授权登录页" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">点击「开始办理」</p>
+    </article>
+
+  </div>
+
+  <!-- ================= 第三阶段 ================= -->
+  <h2 class="phase"><span class="num">3</span>进入投票并表决</h2>
+  <div class="steps">
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">09</span>
+        <h3 class="step-title">进入「业主投票决议」事项页</h3>
+      </div>
+      <p class="step-desc">页面抬头标注主管单位为「<b>惠州市住房和城乡建设局</b>」。正文是「投票须知 / 投票要求」，说明依据《民法典》第 278 条可由业主共同决定的事项（其中第（四）项即「<b>选聘和解聘物业服务企业或者其他管理人</b>」）。<b>这一屏只是说明，无需操作。</b></p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="09_业主投票决议页_投票须知与要求.jpg" alt="业主投票决议事项页" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">先看须知，不用操作</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">10</span>
+        <h3 class="step-title">滑到页面底部，点「开始投票」</h3>
+      </div>
+      <p class="step-desc">这一页比较长，<b>向下滑动到底部</b>。经过「上报流程：查看投票 / 参与投票 / 查看结果」之后，点击蓝色按钮「<b>开始投票</b>」。页面内另有「咨询电话」，可随时查看。</p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="10_业主投票决议页底部_点击开始投票.jpg" alt="页面底部开始投票按钮" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">底部蓝色按钮「开始投票」</p>
+    </article>
+
+    <article class="step reveal">
+      <div class="step-head">
+        <span class="step-no">11</span>
+        <h3 class="step-title">在「进行中」里选择你认可的物业企业</h3>
+      </div>
+      <p class="step-desc">进入议题列表，分为「<b>进行中</b>」和「<b>已结束</b>」两个页签。投票开放前「进行中」为 0 项，显示「没有查询到记录」；<b>9 月 15 日 10:00 以后</b>，本次议题就会出现在「进行中」页签下。<b>点开议题，选择你心仪的物业服务企业，按页面提示提交即可。</b></p>
+      <div class="shot-box">
+        <img class="shot" loading="lazy" decoding="async" src="11_议题列表页_进行中0项暂无记录.jpg" alt="议题列表进行中暂无记录" width="576" height="1024">
+        <span class="zoom-hint">点击放大</span>
+      </div>
+      <p class="shot-note">开放前为空，属正常</p>
+    </article>
+
+  </div>
+
+  <!-- ================= 投票须知 ================= -->
+  <h2 class="phase"><span class="num">4</span>投票前必读</h2>
+
+  <div class="panel reveal">
+    <h3>关于本次表决</h3>
+    <ul class="list">
+      <li><b>事项名称</b>：业主投票决议（电子投票选聘物业服务企业）</li>
+      <li><b>主管单位</b>：惠州市住房和城乡建设局</li>
+      <li><b>法律依据</b>：《民法典》第二百七十八条——选聘、解聘物业服务企业属业主共同决定事项</li>
+      <li><b>表决规则</b>：参与表决需达到专有部分面积和业主人数「双三分之二」，同意需达到参与表决的「双过半」，具体以粤省事页面与实际通告为准</li>
+    </ul>
+  </div>
+
+  <div class="panel reveal">
+    <h3>六个常见问题</h3>
+
+    <details class="faq">
+      <summary>进不去、或者查不到议题怎么办？</summary>
+      <div class="body">先确认左上角城市是「<b>惠州</b>」。若仍查不到，议题列表页有一行「<b>如无法查询到您的投票议题，请点击这里</b>」，点击后按提示处理。</div>
+    </details>
+
+    <details class="faq">
+      <summary>「已结束(2)」是什么意思？</summary>
+      <div class="body">那是<b>以往已经结束的投票记录</b>，能正常显示说明你的业主身份已经核验通过，不是故障。本次议题会在开放后出现在「进行中」页签。</div>
+    </details>
+
+    <details class="faq">
+      <summary>能不能让家人代投？</summary>
+      <div class="body">按规定，同一套房有多个业主的，<b>采用第一个投票业主的意见</b>；既自行投票又委托他人投票的，<b>采用业主本人的意见</b>。建议由产权人本人操作。</div>
+    </details>
+
+    <details class="faq">
+      <summary>提交以后还能改吗？</summary>
+      <div class="body"><b>不能改。</b>提交保存后即为最终意见，请确认清楚再点提交。</div>
+    </details>
+
+    <details class="faq">
+      <summary>什么时候截止？</summary>
+      <div class="body">投票<b>有期限，逾期无法补投，建议尽快完成</b>。具体起止时间以本次业主大会正式通告为准。</div>
+    </details>
+
+    <details class="faq">
+      <summary>刷脸会不会泄露个人信息？</summary>
+      <div class="body">认证与授权由粤省事平台（广东省政务服务和数据管理局）统一提供，信息仅用于核验业主身份，办事单位为惠州市住房和城乡建设局。</div>
+    </details>
+  </div>
+
+  <footer class="foot">
+    <div class="kv">
+      <div class="row"><span class="k">主办单位</span><span class="v">广东省政务服务和数据管理局</span></div>
+      <div class="row"><span class="k">技术支持</span><span class="v">数字广东网络建设有限公司</span></div>
+      <div class="row"><span class="k">事项主管</span><span class="v">惠州市住房和城乡建设局</span></div>
+      <div class="row"><span class="k">咨询电话</span><span class="v">粤省事事项页内「咨询电话」；惠州市住建局物业科 0752-2898620</span></div>
+    </div>
+    <p style="margin-top:16px;">
+      本页截图采集于 <b>2026 年 9 月 14 日</b>，实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理。<br>
+      请仅在本小区业主范围内传阅。
+    </p>
+  </footer>
+
+</main>
+
+<!-- 点击放大用的遮罩层 -->
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="截图放大预览" hidden>
+  <button class="close" type="button" aria-label="关闭">×</button>
+  <img alt="">
+  <p class="cap"></p>
+</div>
+
+<script>
+  // 滚动渐显
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(items, function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    Array.prototype.forEach.call(items, function (el) { io.observe(el); });
+  })();
+
+  // 点击截图放大；Esc 或点击遮罩关闭；关闭后焦点回到原图
+  (function () {
+    var box = document.getElementById('zoom');
+    var bigImg = box.querySelector('img');
+    var cap = box.querySelector('.cap');
+    var btn = box.querySelector('.close');
+    var lastFocus = null;
+
+    function open(img) {
+      lastFocus = img;
+      bigImg.src = img.currentSrc || img.src;
+      bigImg.alt = img.alt || '';
+      cap.textContent = img.alt || '';
+      box.hidden = false;
+      box.classList.add('on');
+      document.body.classList.add('locked');
+      btn.focus();
+    }
+    function close() {
+      box.classList.remove('on');
+      box.hidden = true;
+      document.body.classList.remove('locked');
+      bigImg.removeAttribute('src');
+      if (lastFocus) { lastFocus.focus(); lastFocus = null; }
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.shot'), function (img) {
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.addEventListener('click', function () { open(img); });
+      img.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); }
+      });
+    });
+
+    box.addEventListener('click', function (e) {
+      if (e.target === box || e.target === bigImg) { close(); }
+    });
+    btn.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !box.hidden) { close(); }
+    });
+  })();
+</script>
+
+</body>
+</html>
