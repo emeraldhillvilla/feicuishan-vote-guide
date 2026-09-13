@@ -210,22 +210,27 @@
   @media (hover:hover){
     .shot:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(60,40,10,.06), 0 26px 46px -26px rgba(60,40,10,.55);}
   }
+  /* 放大提示放在图片下方，不覆盖在图上。
+     若浮在右下角，它会压住部分截图底部的操作按钮（如「下一步」「开始办理」），
+     也会挡住标注箭头的尖端，让人误以为那只是一条直线。 */
   .zoom-hint{
-    position:absolute;right:10px;bottom:10px;
+    display:block;
+    width:max-content;
+    max-width:100%;
+    margin:9px auto 0;
     background:rgba(28,23,19,.72);
     color:#FFF3E2;
     font-size:12.5px;
     line-height:1;
-    padding:6px 10px;
+    padding:6px 11px;
     border-radius:999px;
     pointer-events:none;
-    backdrop-filter:blur(2px);
   }
   .shot-note{
     text-align:center;
     color:var(--ink-mute);
     font-size:14px;
-    margin:10px 0 0;
+    margin:6px 0 0;
   }
 
   /* ---------- 点击放大 ---------- */
@@ -359,7 +364,7 @@
     .hero h1{font-size:26px;}
     .step{padding:16px 14px;}
     .step-title{font-size:17.5px;}
-    .zoom-hint{right:10px;bottom:8px;}
+    .zoom-hint{font-size:12px;}
   }
 
   /* 平板竖屏及以上：步骤两栏 */
