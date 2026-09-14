@@ -141,6 +141,87 @@
   .notice--brick{background:var(--brick-soft);border-color:#F0CFC8;color:#7E2C1E;}
   .notice--info{background:var(--green-soft);border-color:#DAE7A8;color:#4A5C10;}
 
+  /* ---------- 开头：长按识别进入粤省事 ---------- */
+  .entry{
+    background:var(--card);
+    border:2px solid var(--blue);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:20px 18px;
+    margin:0 0 22px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+    justify-items:center;
+    text-align:center;
+  }
+  .entry .code{
+    width:min(80%, 300px);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:8px;
+  }
+  .entry .code img{display:block;width:100%;height:auto;}
+  .entry-tag{
+    display:inline-block;
+    background:var(--blue-soft);
+    color:var(--blue-deep);
+    font-size:13px;font-weight:700;letter-spacing:.08em;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:10px;
+  }
+  .entry h2{
+    margin:0 0 12px;
+    font-size:20px;
+    font-weight:700;
+    line-height:1.45;
+    color:var(--ink);
+  }
+  .entry ol{
+    margin:0 0 12px;
+    padding:0;
+    list-style:none;
+    counter-reset:estep;
+  }
+  .entry ol li{
+    position:relative;
+    padding-left:36px;
+    margin-bottom:9px;
+    color:var(--ink-soft);
+    font-size:17px;
+    text-align:left;
+    counter-increment:estep;
+  }
+  .entry ol li::before{
+    content:counter(estep);
+    position:absolute;left:0;top:.18em;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--blue-deep);color:#fff;
+    display:grid;place-items:center;
+    font-size:14px;font-weight:700;
+  }
+  .entry ol li b{color:var(--ink);font-weight:600;}
+  .entry .fallback{
+    margin:0;
+    font-size:15.5px;
+    color:var(--ink-mute);
+    text-align:left;
+  }
+  .entry .fallback b{color:var(--blue-deep);}
+  @media (min-width:760px){
+    .entry{
+      grid-template-columns:300px 1fr;
+      justify-items:start;
+      text-align:left;
+      padding:26px;
+      gap:28px;
+    }
+    .entry .code{width:300px;}
+    .entry h2{font-size:22px;}
+  }
+
   h2.phase{
     display:flex;align-items:center;gap:12px;
     font-size:15px;
@@ -443,6 +524,23 @@
 
 <main class="wrap">
 
+  <!-- 开头：长按识别直接进入粤省事，省去学搜索 -->
+  <section class="entry reveal">
+    <div class="code">
+      <img src="粤省事葵花码.png" alt="粤省事小程序码，长按识别即可打开粤省事" width="820" height="820">
+    </div>
+    <div>
+      <span class="entry-tag">从这里开始</span>
+      <h2>长按这个二维码，直接打开粤省事</h2>
+      <ol>
+        <li>用手指<b>长按</b>这个码，等菜单弹出来</li>
+        <li>点菜单里的「<b>识别小程序</b>」（或写着「粤省事」的那一项）</li>
+        <li>进去后先确认<b>左上角城市是「惠州」</b>，不是「惠州」就点它切换</li>
+      </ol>
+      <p class="fallback">长按没反应？直接在微信里搜索「<b>粤省事</b>」，一样能进，进去后同样按下面 12 步走。</p>
+    </div>
+  </section>
+
   <div class="notice notice--brick reveal">
     <strong>请务必在投票通道开放后再进行</strong>
     在 9 月 15 日 10:00 之前进入，议题列表会显示「没有查询到记录」，属正常现象，不必担心。
@@ -450,7 +548,7 @@
 
   <div class="notice notice--info reveal">
     <strong>一句话看懂 · 图中红框就是要点的位置</strong>
-    微信打开粤省事并确认城市是「惠州」→ 搜索「业主」→ 点开「业主投票决议」→ 按提示完成人脸认证（其中会跳到微信核验页，打勾后点「下一步」）→ 点「开始投票」→ 在「进行中」里选择你认可的物业服务企业并提交。<b>每张截图都可以点击放大</b>，看不清时点开看。
+    长按上面的码打开粤省事（或微信搜「粤省事」），确认城市是「惠州」→ 搜索「业主」→ 点开「业主投票决议」→ 按提示完成人脸认证（其中会跳到微信核验页，打勾后点「下一步」）→ 点「开始投票」→ 在「进行中」里选择你认可的物业服务企业并提交。<b>每张截图都可以点击放大</b>，看不清时点开看。
   </div>
 
   <!-- ================= 第一阶段 ================= -->
