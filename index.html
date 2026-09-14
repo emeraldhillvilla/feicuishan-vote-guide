@@ -325,6 +325,8 @@
 
   /* 截图：定位基准框，宽度随容器自适应，最宽 340 */
   .shot-box{position:relative;width:100%;max-width:340px;margin:0 auto;}
+  /* picture 默认是行内元素，其内部 img 为块级时会多出一个空行盒，这里统一块级化 */
+  picture{display:block;}
   .shot{
     display:block;
     width:100%;
@@ -602,7 +604,10 @@
   <!-- 开头：长按识别直接进入粤省事，省去学搜索 -->
   <section class="entry reveal">
     <div class="code">
-      <img src="粤省事葵花码.png?v=2" alt="粤省事小程序码，长按识别即可打开粤省事" width="820" height="820">
+      <picture>
+        <source type="image/webp" srcset="粤省事葵花码.webp?v=3">
+        <img src="粤省事葵花码.png?v=3" alt="粤省事小程序码，长按识别即可打开粤省事" width="820" height="820">
+      </picture>
       <span class="code-btn">长按识别二维码</span>
     </div>
     <div>
@@ -638,7 +643,10 @@
       </div>
       <p class="step-desc">微信搜索并打开「粤省事」小程序（或长按上方的二维码）。先看<b>左上角</b>是否显示「<b>惠州</b>」——<b>红框圈的就是城市名</b>，它右边紧挨着天气和气温，两者都显示惠州，说明定位正确；若显示其他城市，<b>点城市名即可切换</b>。确认后，<b>点屏幕最下方中间的「办事」</b>。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="01_粤省事首页_点底部办事.jpg?v=3" alt="粤省事首页，确认左上角为惠州，点底部办事" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="01_粤省事首页_点底部办事.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="01_粤省事首页_点底部办事.jpg?v=4" alt="粤省事首页，确认左上角为惠州，点底部办事" width="1080" height="2223">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">先确认「惠州」，再点底部的「办事」</p>
@@ -651,7 +659,10 @@
       </div>
       <p class="step-desc">「办事」页从上到下依次是「首页服务」「常用服务」「<b>人生事</b>」「社会关爱」四个分组，<b>要往下滑一段才能看到「人生事」</b>。在「人生事」分组里点「<b>住房置业</b>」——它在第二排第三个，左边是「教育」，右边是「不动产」。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="02_办事页_人生事分组内点住房置业.jpg?v=2" alt="办事页，在人生事分组里点住房置业" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="02_办事页_人生事分组内点住房置业.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="02_办事页_人生事分组内点住房置业.jpg?v=4" alt="办事页，在人生事分组里点住房置业" width="1080" height="2228">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">「人生事」分组里，第二排第三个</p>
@@ -664,7 +675,10 @@
       </div>
       <p class="step-desc">进入「住房置业」页，<b>排在最上面的第一项就是「业主投票决议」</b>，不用在列表里找。下面依次是商品房网签合同查询、预售许可证查询、房屋维修资金查询等，都与本次投票无关。页面底部标注「<b>省自然资源厅、惠州市住房和城乡建设局 联合提供服务</b>」，可确认是惠州本地服务。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="03_住房置业页_点业主投票决议.jpg?v=2" alt="住房置业页，第一项业主投票决议" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="03_住房置业页_点业主投票决议.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="03_住房置业页_点业主投票决议.jpg?v=4" alt="住房置业页，第一项业主投票决议" width="1080" height="2217">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">就在列表最上面第一项</p>
@@ -677,7 +691,10 @@
       </div>
       <p class="step-desc">系统弹出提示「<b>本次操作需要您进行登录验证</b>」，这是正常的实名核验环节。请注意弹窗下面有<b>两个按钮</b>：左边是「取消」，右边是「确定」——<b>要点右边那个确定</b>。不小心点到左边的「取消」会退出，得从头再来。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="04_弹出提示_点右边确定.jpg?v=2" alt="登录验证提示弹窗，点右边的确定" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="04_弹出提示_点右边确定.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="04_弹出提示_点右边确定.jpg?v=4" alt="登录验证提示弹窗，点右边的确定" width="1080" height="2217">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">点右边「确定」，不要点左边的「取消」</p>
@@ -696,7 +713,10 @@
       </div>
       <p class="step-desc">页面出现四种登录方式，<b>默认选中第一项</b>「广东省统一身份认证」，此时下方「我同意……」的方框<b>尚未勾选</b>。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="05_选择登录方式_默认广东省统一身份认证.jpg?v=2" alt="选择登录方式默认页" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="05_选择登录方式_默认广东省统一身份认证.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="05_选择登录方式_默认广东省统一身份认证.jpg?v=4" alt="选择登录方式默认页" width="1080" height="1919">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">默认选中第一项</p>
@@ -709,7 +729,10 @@
       </div>
       <p class="step-desc">本指引以选择第二项「<b>人脸识别认证</b>」为例。<b>无论选哪种方式，最后都要刷脸</b>，选哪一项都能办成。然后<b>务必把下方「我同意……」的方框打上勾</b>，勾上以后才能点页面底部的「<b>下一步</b>」。<b>三步缺一不可：① 选方式 → ② 打勾 → ③ 点下一步。</b></p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="06_选择登录方式_改选人脸识别并勾选同意.jpg?v=2" alt="改选人脸识别并勾选同意" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="06_选择登录方式_改选人脸识别并勾选同意.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="06_选择登录方式_改选人脸识别并勾选同意.jpg?v=4" alt="改选人脸识别并勾选同意" width="1080" height="1919">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">① 选这项 → ② 这里打勾 → ③ 点下一步</p>
@@ -722,7 +745,10 @@
       </div>
       <p class="step-desc">页面自动带出<b>证件类型、姓名、身份证号</b>（一般无需手动填写）。<b>先勾选「我同意……」方框，再点蓝色按钮「开始人脸识别验证」</b>，按屏幕提示完成刷脸。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="07_登录页_人脸识别验证填写证件信息.jpg?v=2" alt="人脸识别验证页" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="07_登录页_人脸识别验证填写证件信息.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="07_登录页_人脸识别验证填写证件信息.jpg?v=4" alt="人脸识别验证页" width="1080" height="1919">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">① 先打勾 → ② 再点按钮刷脸（图中个人信息已遮蔽）</p>
@@ -735,7 +761,10 @@
       </div>
       <p class="step-desc">点「开始人脸识别验证」后会跳到<b>微信自己的人脸核验页</b>（页面上面标注「粤省事 申请使用」）。这一步由微信提供，页面会提示「请确保为本人操作」。先确认「<b>我已阅读并同意</b>……」前面的圆圈<b>已打勾</b>（通常默认勾好，若没勾请点一下），再点<b>绿色按钮「下一步」</b>，然后按屏幕提示完成刷脸。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="08_微信人脸识别授权页_打勾并点下一步.jpg?v=2" alt="微信人脸识别授权页" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="08_微信人脸识别授权页_打勾并点下一步.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="08_微信人脸识别授权页_打勾并点下一步.jpg?v=4" alt="微信人脸识别授权页" width="1080" height="2232">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">① 确认打勾 → ② 点下一步</p>
@@ -748,7 +777,10 @@
       </div>
       <p class="step-desc">刷脸通过后进入「<b>授权登录</b>」页。页面写明本次由「<b>惠州市住房和城乡建设局</b>」提供服务，需提供姓名、证件信息、手机号码用于核验身份。确认后点击「<b>开始办理</b>」。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="09_授权登录页_点击开始办理.jpg?v=2" alt="授权登录页" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="09_授权登录页_点击开始办理.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="09_授权登录页_点击开始办理.jpg?v=4" alt="授权登录页" width="1080" height="1919">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">点击「开始办理」</p>
@@ -767,7 +799,10 @@
       </div>
       <p class="step-desc">页面抬头标注主管单位为「<b>惠州市住房和城乡建设局</b>」。正文是「投票须知 / 投票要求」，说明依据《民法典》第 278 条可由业主共同决定的事项（其中第（四）项即「<b>选聘和解聘物业服务企业或者其他管理人</b>」）。<b>这一屏只是说明，无需操作。</b></p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="10_业主投票决议页_投票须知与要求.jpg?v=2" alt="业主投票决议事项页" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="10_业主投票决议页_投票须知与要求.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="10_业主投票决议页_投票须知与要求.jpg?v=4" alt="业主投票决议事项页" width="1080" height="1919">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">先看须知，不用操作</p>
@@ -780,7 +815,10 @@
       </div>
       <p class="step-desc">这一页比较长，<b>向下滑动到底部</b>。经过「上报流程：查看投票 / 参与投票 / 查看结果」之后，点击蓝色按钮「<b>开始投票</b>」。页面内另有「咨询电话」，可随时查看。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="11_业主投票决议页底部_点击开始投票.jpg?v=2" alt="页面底部开始投票按钮" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="11_业主投票决议页底部_点击开始投票.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="11_业主投票决议页底部_点击开始投票.jpg?v=4" alt="页面底部开始投票按钮" width="1080" height="1919">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">底部蓝色按钮「开始投票」</p>
@@ -793,7 +831,10 @@
       </div>
       <p class="step-desc">进入后是「业主投票决议」的<b>议题列表页</b>，上方有「<b>进行中</b>」和「<b>已结束</b>」两个页签。投票开放前，<b>「进行中」显示 0 项、页面写着「没有查询到记录」，这是正常的</b>。<b>9 月 15 日 10:00 以后</b>，本次议题就会出现在「进行中」页签下——<b>点开议题，选择你心仪的物业服务企业，按页面提示提交即可</b>。若届时仍查不到议题，列表上方有一行「如无法查询到您的投票议题，请点击这里」，点它按提示处理。</p>
       <div class="shot-box">
-        <img class="shot" loading="lazy" decoding="async" src="12_议题列表页_进行中0项暂无记录.jpg?v=2" alt="议题列表进行中暂无记录" width="576" height="1024">
+        <picture>
+          <source type="image/webp" srcset="12_议题列表页_进行中0项暂无记录.webp?v=4">
+          <img class="shot" loading="lazy" decoding="async" src="12_议题列表页_进行中0项暂无记录.jpg?v=4" alt="议题列表进行中暂无记录" width="1080" height="1919">
+        </picture>
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">此图为开放前的状态：进行中 0 项、已结束 2 项</p>
@@ -815,7 +856,7 @@
   </div>
 
   <div class="panel reveal">
-    <h3>八个常见问题</h3>
+    <h3>九个常见问题</h3>
 
     <details class="faq">
       <summary>进不去、或者查不到议题怎么办？</summary>
@@ -864,6 +905,16 @@
       <summary>刷脸会不会泄露个人信息？</summary>
       <div class="body">认证与授权由粤省事平台（广东省政务服务和数据管理局）统一提供，信息仅用于核验业主身份，办事单位为惠州市住房和城乡建设局。</div>
     </details>
+
+    <details class="faq">
+      <summary>投完票，别人能知道我的选择或者我参与了吗？</summary>
+      <div class="body"><b>邻居看不到你投给了谁。</b>系统对外公布的是<b>汇总数字</b>——参与表决的业主人数和专有部分面积、各议题同意的人数与面积等，不会列出「哪一户投了什么」。公示业主名册也做了脱敏：姓名只留最后一个字，身份证号只留前 4 位和后 4 位，其余用 * 代替。你自己则可以在粤省事里<b>查询本人的表决意见</b>，以及参与投票的总人数和总面积。<br>
+      但有两点要如实说明：<br>
+      ① 本次采用的是<b>记名投票</b>，投票记录可以对应到户，不是完全匿名。一旦出现争议（比如有人冒名投票、或共有人主张别人越权代投），街道办事处会同住建部门<b>可以按程序核查记录</b>。<br>
+      ② <b>「你有没有参与」是会被统计的</b>。只要你在投票期间登录粤省事查阅过议题，就视为参会，计入参与表决的人数和面积。<br>
+      所以真正会泄露选择的，其实是<b>把手机或验证码交给别人代操作</b>。请务必自己投，不要请人「帮你在手机上点一下」。<br>
+      依据：《广东省物业管理条例》第二十三条、《惠州市业主大会会议电子投票表决操作指引（2025修订版）》第七条、第十三条、第十七条、第十八条、第二十一条。</div>
+    </details>
   </div>
 
   <!-- 结尾：小区实景，给页面一个落点 -->
@@ -874,7 +925,7 @@
 
   <footer class="foot">
     <p>
-      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v1.12</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
+      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v1.14</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
     </p>
   </footer>
 
