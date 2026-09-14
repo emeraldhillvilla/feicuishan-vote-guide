@@ -53,7 +53,18 @@
 
   /* ---------- 首屏 ---------- */
   .hero{
-    background:var(--ink);
+    /* 小区实景照片 + 两层深色蒙版：
+       第一层自上而下渐深，保证底部信息卡的对比度；
+       第二层左侧偏深，让左对齐的标题压得住画面；
+       照片压到 1500px／255KB，窄屏另换 820px 小图（见下方断点）。 */
+    background-color:var(--ink);
+    background-image:
+      linear-gradient(180deg, rgba(6,34,52,.44) 0%, rgba(6,34,52,.73) 58%, rgba(6,34,52,.94) 100%),
+      linear-gradient(100deg, rgba(6,34,52,.52) 0%, rgba(6,34,52,.06) 58%, rgba(6,34,52,.32) 100%),
+      url("翡翠山环湖别墅.jpg?v=2");
+    background-size:cover;
+    background-position:center 45%;
+    background-repeat:no-repeat;
     color:#EAF4FA;
     border-radius:0 0 26px 26px;
     /* 与 .wrap 使用同一 gutter，保证首屏文字与正文左对齐 */
@@ -463,6 +474,30 @@
   }
   details.faq .body b{color:var(--ink);font-weight:600;}
 
+  /* ---------- 结尾：小区实景 ---------- */
+  /* 用 aspect-ratio 裁成横幅，避免图片太高把页尾拉长。
+     注意必须写 height:auto：img 标签上的 height 属性会作为表现性提示生效，
+     会把 aspect-ratio 顶掉，导致图片按原始比例撑得很高（这里踩过坑）。 */
+  .closing{margin:40px 0 0;}
+  .closing img{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    object-position:center 42%;
+    border-radius:22px;
+    border:1px solid var(--line);
+    box-shadow:0 18px 40px -26px rgba(10,63,92,.5);
+  }
+  .closing figcaption{
+    margin-top:11px;
+    text-align:center;
+    color:var(--ink-mute);
+    font-size:14.5px;
+    letter-spacing:.02em;
+  }
+
   footer.foot{
     margin-top:38px;
     padding-top:20px;
@@ -482,6 +517,16 @@
   }
 
   /* ================= 断点 ================= */
+
+  /* 窄屏换用 820px 小图（80KB），明显省流量；蒙版参数与主样式逐字一致 */
+  @media (max-width:560px){
+    .hero{
+      background-image:
+        linear-gradient(180deg, rgba(6,34,52,.44) 0%, rgba(6,34,52,.73) 58%, rgba(6,34,52,.94) 100%),
+        linear-gradient(100deg, rgba(6,34,52,.52) 0%, rgba(6,34,52,.06) 58%, rgba(6,34,52,.32) 100%),
+        url("翡翠山环湖别墅_小图.jpg?v=2");
+    }
+  }
 
   /* 小手机（iPhone SE 等） */
   @media (max-width:400px){
@@ -836,9 +881,15 @@
     </details>
   </div>
 
+  <!-- 结尾：小区实景，给页面一个落点 -->
+  <figure class="closing reveal">
+    <img src="翡翠山环湖别墅.jpg?v=2" alt="小区实景：红砖别墅环抱人工湖，湖面倒映蓝天绿树" width="1500" height="1125" loading="lazy" decoding="async">
+    <figcaption>我们的家园 · 请投出您的一票</figcaption>
+  </figure>
+
   <footer class="foot">
     <p>
-      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v5</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
+      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v6</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
     </p>
   </footer>
 
