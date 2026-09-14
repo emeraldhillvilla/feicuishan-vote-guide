@@ -7,23 +7,24 @@
 <title>粤省事 · 业主投票操作指引</title>
 <style>
   :root{
-    /* 稳重的蓝色系：深海军蓝做底、钢蓝做强调，冷调浅蓝灰做纸面 */
-    --paper:#F2F6FA;
+    /* 配色取自粤省事 logo：蓝 #039FEA、黄绿 #ABCD05、灰 #898989。
+       logo 的蓝绿都很亮，直接承担文字对比度不足（#039FEA 白底仅 2.6:1），
+       故文字与实心块用同色相加深版（--blue-deep / --green-deep），原色只用于强调。 */
+    --paper:#F3F8FB;
     --card:#FFFFFF;
-    --ink:#16304A;
-    --ink-soft:#4C6379;
-    --ink-mute:#6E839A;
-    --blue:#2E6DA6;
-    --blue-deep:#1E4E79;
-    --blue-soft:#E5EEF7;
-    --blue-lite:#7FB0DC;   /* 深底上的浅蓝，用于首屏 */
+    --ink:#0A3F5C;
+    --ink-soft:#47606E;
+    --ink-mute:#6E8189;
+    --blue:#039FEA;
+    --blue-deep:#076A99;
+    --blue-soft:#E1F3FC;
+    --green:#ABCD05;
+    --green-soft:#F2F8DE;
     --brick:#A8382A;
     --brick-soft:#FBEDEA;
-    --teal:#1D5C6B;
-    --teal-soft:#E4F0F3;
-    --line:#DCE6F0;
+    --line:#D7E7EF;
     --radius:18px;
-    --shadow:0 1px 2px rgba(22,48,74,.05), 0 10px 28px -18px rgba(22,48,74,.30);
+    --shadow:0 1px 2px rgba(10,63,92,.05), 0 10px 28px -18px rgba(10,63,92,.30);
     --gutter:18px;
   }
   *{box-sizing:border-box;}
@@ -37,7 +38,7 @@
     line-height:1.75;
     letter-spacing:.01em;
     -webkit-font-smoothing:antialiased;
-    -webkit-tap-highlight-color:rgba(46,109,166,.16);
+    -webkit-tap-highlight-color:rgba(3,159,234,.16);
     overflow-x:hidden;
   }
   img{max-width:100%;}
@@ -45,7 +46,7 @@
 
   /* 键盘可达性：统一的焦点环 */
   a:focus-visible,summary:focus-visible,.shot:focus-visible,button:focus-visible{
-    outline:3px solid var(--blue);
+    outline:3px solid var(--blue-deep);
     outline-offset:3px;
     border-radius:8px;
   }
@@ -53,7 +54,7 @@
   /* ---------- 首屏 ---------- */
   .hero{
     background:var(--ink);
-    color:#EFF5FA;
+    color:#EAF4FA;
     border-radius:0 0 26px 26px;
     /* 与 .wrap 使用同一 gutter，保证首屏文字与正文左对齐 */
     padding:34px var(--gutter) 30px;
@@ -65,7 +66,7 @@
     content:"";
     position:absolute;inset:auto -60px -90px auto;
     width:260px;height:260px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, rgba(80,146,204,.45), transparent 68%);
+    background:radial-gradient(circle at 30% 30%, rgba(3,159,234,.42), transparent 68%);
     pointer-events:none;
   }
   .hero > *{position:relative;z-index:1;}
@@ -74,8 +75,8 @@
   .eyebrow{
     display:inline-block;
     font-size:13px;font-weight:600;letter-spacing:.14em;
-    color:var(--blue-lite);
-    border:1px solid rgba(127,176,220,.5);
+    color:var(--green);
+    border:1px solid rgba(171,205,5,.5);
     border-radius:999px;
     padding:4px 12px;
     margin-bottom:16px;
@@ -89,7 +90,7 @@
   }
   .hero .sub{
     margin:0;
-    color:#A7BDD2;
+    color:#A8C6D6;
     font-size:16px;
   }
   /* 关键信息：自动列数，窄屏 1 列、宽屏自动 2 列 */
@@ -113,7 +114,7 @@
   }
   .fact .k{
     font-size:13px;
-    color:#9DB3C8;
+    color:#94B2C4;
     flex:0 0 auto;
     min-width:5em;
     margin:0;
@@ -122,11 +123,11 @@
     margin:0;
     font-size:16.5px;
     font-weight:600;
-    color:#EFF5FA;
+    color:#EAF4FA;
     flex:1 1 auto;
     min-width:0;
   }
-  .fact .v em{color:var(--blue-lite);font-style:normal;}
+  .fact .v em{color:var(--green);font-style:normal;}
 
   /* ---------- 通用 ---------- */
   .notice{
@@ -138,7 +139,7 @@
   }
   .notice strong{display:block;margin-bottom:4px;font-size:17px;}
   .notice--brick{background:var(--brick-soft);border-color:#F0CFC8;color:#7E2C1E;}
-  .notice--info{background:var(--teal-soft);border-color:#C6DFE6;color:#14454F;}
+  .notice--info{background:var(--green-soft);border-color:#DAE7A8;color:#4A5C10;}
 
   h2.phase{
     display:flex;align-items:center;gap:12px;
@@ -157,7 +158,7 @@
     display:grid;place-items:center;
     width:26px;height:26px;flex:0 0 26px;
     border-radius:50%;
-    background:var(--blue);color:#fff;
+    background:var(--blue-deep);color:#fff;
     font-size:14px;letter-spacing:0;
   }
 
@@ -204,13 +205,13 @@
     margin:0;
     border-radius:14px;
     border:1px solid var(--line);
-    box-shadow:0 2px 4px rgba(22,48,74,.06), 0 18px 36px -26px rgba(22,48,74,.45);
-    background:#EDF2F7;
+    box-shadow:0 2px 4px rgba(10,63,92,.06), 0 18px 36px -26px rgba(10,63,92,.45);
+    background:#EAF2F7;
     cursor:zoom-in;
     transition:transform .25s cubic-bezier(.22,.7,.3,1), box-shadow .25s ease;
   }
   @media (hover:hover){
-    .shot:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(22,48,74,.08), 0 26px 46px -26px rgba(22,48,74,.5);}
+    .shot:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(10,63,92,.08), 0 26px 46px -26px rgba(10,63,92,.5);}
   }
   /* 放大提示放在图片下方，不覆盖在图上。
      若浮在右下角，它会压住部分截图底部的操作按钮（如「下一步」「开始办理」），
@@ -220,7 +221,7 @@
     width:max-content;
     max-width:100%;
     margin:9px auto 0;
-    background:rgba(16,38,58,.78);
+    background:rgba(10,50,74,.78);
     color:#EAF2FA;
     font-size:12.5px;
     line-height:1;
@@ -238,7 +239,7 @@
   /* ---------- 点击放大 ---------- */
   .zoom{
     position:fixed;inset:0;z-index:120;
-    background:rgba(10,22,36,.94);
+    background:rgba(6,34,52,.94);
     display:none;
     align-items:center;justify-content:center;
     padding:16px;
@@ -254,7 +255,7 @@
   }
   .zoom .cap{
     position:absolute;left:0;right:0;bottom:14px;
-    text-align:center;color:#CFDCE8;font-size:14px;
+    text-align:center;color:#CFE2EE;font-size:14px;
     padding:0 20px;
   }
   .zoom .close{
@@ -304,7 +305,7 @@
     margin-bottom:10px;
     overflow:hidden;
   }
-  details.faq[open]{border-color:#BBD3E7;}
+  details.faq[open]{border-color:#B8DCF0;}
   details.faq summary{
     cursor:pointer;
     list-style:none;
@@ -319,8 +320,8 @@
     content:"";
     position:absolute;right:19px;top:50%;
     width:8px;height:8px;
-    border-right:2px solid var(--blue);
-    border-bottom:2px solid var(--blue);
+    border-right:2px solid var(--blue-deep);
+    border-bottom:2px solid var(--blue-deep);
     transform:translateY(-70%) rotate(45deg);
     transition:transform .22s ease;
   }
