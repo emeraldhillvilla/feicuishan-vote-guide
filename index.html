@@ -341,12 +341,26 @@
     letter-spacing:-.005em;
     min-width:0;
   }
-  .step-desc{
-    margin:8px 0 16px;
-    color:var(--ink-soft);
-    font-size:16.5px;
+  /* 每一步的「详细说明」默认收起：
+     页面主体只留「编号+标题 / 截图 / 一行提示」，长者扫读更快，需要细节再点开。 */
+  details.step-more{margin-top:12px;border-top:1px dashed var(--line);}
+  details.step-more summary{
+    cursor:pointer;list-style:none;position:relative;
+    padding:11px 26px 11px 0;
+    font-size:15px;font-weight:600;color:var(--blue-deep);
   }
-  .step-desc b{color:var(--ink);font-weight:600;}
+  details.step-more summary::-webkit-details-marker{display:none;}
+  details.step-more summary::after{
+    content:"";position:absolute;right:7px;top:50%;
+    width:7px;height:7px;
+    border-right:2px solid var(--blue-deep);
+    border-bottom:2px solid var(--blue-deep);
+    transform:translateY(-70%) rotate(45deg);
+    transition:transform .22s ease;
+  }
+  details.step-more[open] summary::after{transform:translateY(-30%) rotate(-135deg);}
+  details.step-more .body{padding:0 0 13px;color:var(--ink-soft);font-size:16px;}
+  details.step-more .body b{color:var(--ink);font-weight:600;}
 
   /* 截图：定位基准框，宽度随容器自适应，最宽 340 */
   .shot-box{position:relative;width:100%;max-width:340px;margin:0 auto;}
@@ -565,9 +579,9 @@
     .shot-box{max-width:300px;}
     .panel{padding:26px;}
     .step{padding:24px 22px;}
-    .step-desc{font-size:17px;}
+    details.step-more .body{font-size:16.5px;}
     .notice{font-size:17px;}
-    ul.list li,.panel p,details.faq summary,details.faq .body{font-size:17px;}
+    ul.list li,.panel p,details.faq summary,details.faq .body,details.step-more .body{font-size:17px;}
   }
 
   /* 宽屏：截图稍收窄，阅读栏不失控 */
@@ -601,7 +615,8 @@
     .step,.panel,details.faq{box-shadow:none;border-color:#ccc;break-inside:avoid;}
     .reveal{opacity:1;transform:none;}
     .zoom-hint,.zoom{display:none !important;}
-    details.faq .body{display:block !important;}
+    details.faq .body,details.step-more .body{display:block !important;}
+    details.step-more summary{display:none;}
     details.faq summary::after{display:none;}
     .shot-box{max-width:230px;}
   }
@@ -666,7 +681,6 @@
         <span class="step-no">01</span>
         <h3 class="step-title">打开粤省事，确认城市是「惠州」，点底部「办事」</h3>
       </div>
-      <p class="step-desc">微信搜索并打开「粤省事」小程序（或长按上方的二维码）。先看<b>左上角</b>是否显示「<b>惠州</b>」——<b>红框圈的就是城市名</b>，它右边紧挨着天气和气温，两者都显示惠州，说明定位正确；若显示其他城市，<b>点城市名即可切换</b>。确认后，<b>点屏幕最下方中间的「办事」</b>。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="01_粤省事首页_点底部办事.webp?v=4">
@@ -675,6 +689,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">先确认「惠州」，再点底部的「办事」</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">打开微信里的「粤省事」（或长按本页上方的二维码）。<b>若左上角不是「惠州」</b>，点城市名即可切换；确认后<b>点屏幕最下方的「办事」</b>。</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -682,7 +700,6 @@
         <span class="step-no">02</span>
         <h3 class="step-title">在「人生事」里点「住房置业」</h3>
       </div>
-      <p class="step-desc">「办事」页从上到下依次是「首页服务」「常用服务」「<b>人生事</b>」「社会关爱」四个分组，<b>要往下滑一段才能看到「人生事」</b>。在「人生事」分组里点「<b>住房置业</b>」——它在第二排第三个，左边是「教育」，右边是「不动产」。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="02_办事页_人生事分组内点住房置业.webp?v=4">
@@ -691,6 +708,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">「人生事」分组里，第二排第三个</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">「办事」页要<b>往下滑一段</b>才看得到「人生事」分组。这一格在<b>第二排第三个</b>，左边是「教育」，右边是「不动产」。</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -698,7 +719,6 @@
         <span class="step-no">03</span>
         <h3 class="step-title">点最上面第一项「业主投票决议」</h3>
       </div>
-      <p class="step-desc">进入「住房置业」页，<b>排在最上面的第一项就是「业主投票决议」</b>，不用在列表里找。下面依次是商品房网签合同查询、预售许可证查询、房屋维修资金查询等，都与本次投票无关。页面底部标注「<b>省自然资源厅、惠州市住房和城乡建设局 联合提供服务</b>」，可确认是惠州本地服务。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="03_住房置业页_点业主投票决议.webp?v=4">
@@ -707,6 +727,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">就在列表最上面第一项</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">「业主投票决议」<b>就在列表最上面第一项</b>，不用往下翻。下面的网签合同查询、预售许可证查询、维修资金查询都与本次投票无关。</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -714,7 +738,6 @@
         <span class="step-no">04</span>
         <h3 class="step-title">弹出提示，点<b>右边</b>的「确定」</h3>
       </div>
-      <p class="step-desc">系统弹出提示「<b>本次操作需要您进行登录验证</b>」，这是正常的实名核验环节。请注意弹窗下面有<b>两个按钮</b>：左边是「取消」，右边是「确定」——<b>要点右边那个确定</b>。不小心点到左边的「取消」会退出，得从头再来。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="04_弹出提示_点右边确定.webp?v=4">
@@ -723,6 +746,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">点右边「确定」，不要点左边的「取消」</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">这条提示是正常的实名核验环节。<b>弹窗下面有两个按钮</b>：左边「取消」、右边「确定」。点到「取消」会退出，得从头再来。</div>
+      </details>
     </article>
 
   </div>
@@ -736,7 +763,6 @@
         <span class="step-no">05</span>
         <h3 class="step-title">进入「选择登录方式」</h3>
       </div>
-      <p class="step-desc">页面出现四种登录方式，<b>默认选中第一项</b>「广东省统一身份认证」，此时下方「我同意……」的方框<b>尚未勾选</b>。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="05_选择登录方式_默认广东省统一身份认证.webp?v=4">
@@ -745,6 +771,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">默认选中第一项</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">页面列出四种登录方式，<b>默认选中第一项</b>，此时下方「我同意」的方框还没有勾。</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -752,7 +782,6 @@
         <span class="step-no">06</span>
         <h3 class="step-title">选方式、打勾、点「下一步」</h3>
       </div>
-      <p class="step-desc">本指引以选择第二项「<b>人脸识别认证</b>」为例。<b>无论选哪种方式，最后都要刷脸</b>，选哪一项都能办成。然后<b>务必把下方「我同意……」的方框打上勾</b>，勾上以后才能点页面底部的「<b>下一步</b>」。<b>三步缺一不可：① 选方式 → ② 打勾 → ③ 点下一步。</b></p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="06_选择登录方式_改选人脸识别并勾选同意.webp?v=4">
@@ -761,6 +790,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">① 选这项 → ② 这里打勾 → ③ 点下一步</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">本页<b>三步缺一不可</b>：① 选「人脸识别认证」→ ② 把「我同意」打勾 → ③ 点底部「下一步」。<b>不打勾就点不了下一步。</b>（选哪种方式最后都要刷脸。）</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -768,7 +801,6 @@
         <span class="step-no">07</span>
         <h3 class="step-title">核对证件信息，点「开始人脸识别验证」</h3>
       </div>
-      <p class="step-desc">页面自动带出<b>证件类型、姓名、身份证号</b>（一般无需手动填写）。<b>先勾选「我同意……」方框，再点蓝色按钮「开始人脸识别验证」</b>，按屏幕提示完成刷脸。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="07_登录页_人脸识别验证填写证件信息.webp?v=4">
@@ -777,6 +809,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">① 先打勾 → ② 再点按钮刷脸（图中个人信息已遮蔽）</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">证件信息由系统自动带出，<b>无需手动填写</b>。先勾选「我同意」，再点蓝色按钮「开始人脸识别验证」，然后按提示刷脸。</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -784,7 +820,6 @@
         <span class="step-no">08</span>
         <h3 class="step-title">微信人脸核验：确认打勾，点「下一步」</h3>
       </div>
-      <p class="step-desc">点「开始人脸识别验证」后会跳到<b>微信自己的人脸核验页</b>（页面上面标注「粤省事 申请使用」）。这一步由微信提供，页面会提示「请确保为本人操作」。先确认「<b>我已阅读并同意</b>……」前面的圆圈<b>已打勾</b>（通常默认勾好，若没勾请点一下），再点<b>绿色按钮「下一步」</b>，然后按屏幕提示完成刷脸。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="08_微信人脸识别授权页_打勾并点下一步.webp?v=4">
@@ -793,6 +828,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">① 确认打勾 → ② 点下一步</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">这里会跳到<b>微信自己的人脸核验页</b>（页面上写明「粤省事 申请使用」）。确认「我已阅读并同意」<b>已打勾</b>（通常默认勾好），再点绿色按钮「下一步」，然后按提示刷脸。</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -800,7 +839,6 @@
         <span class="step-no">09</span>
         <h3 class="step-title">授权登录，点「开始办理」</h3>
       </div>
-      <p class="step-desc">刷脸通过后进入「<b>授权登录</b>」页。页面写明本次由「<b>惠州市住房和城乡建设局</b>」提供服务，需提供姓名、证件信息、手机号码用于核验身份。确认后点击「<b>开始办理</b>」。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="09_授权登录页_点击开始办理.webp?v=4">
@@ -809,6 +847,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">点击「开始办理」</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">刷脸通过后进入「授权登录」页，写明由<b>惠州市住房和城乡建设局</b>提供服务，信息仅用于核验业主身份。确认后点「开始办理」。</div>
+      </details>
     </article>
 
   </div>
@@ -822,7 +864,6 @@
         <span class="step-no">10</span>
         <h3 class="step-title">进入「业主投票决议」事项页</h3>
       </div>
-      <p class="step-desc">页面抬头标注主管单位为「<b>惠州市住房和城乡建设局</b>」。正文是「投票须知 / 投票要求」，说明依据《民法典》第 278 条可由业主共同决定的事项（其中第（四）项即「<b>选聘和解聘物业服务企业或者其他管理人</b>」）。<b>这一屏只是说明，无需操作。</b></p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="10_业主投票决议页_投票须知与要求.webp?v=4">
@@ -831,6 +872,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">先看须知，不用操作</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">正文是「投票须知 / 投票要求」，说明依据《民法典》第 278 条，选聘物业属于业主共同决定事项。<b>这一屏只是说明，无需操作。</b></div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -838,7 +883,6 @@
         <span class="step-no">11</span>
         <h3 class="step-title">滑到页面底部，点「开始投票」</h3>
       </div>
-      <p class="step-desc">这一页比较长，<b>向下滑动到底部</b>。经过「上报流程：查看投票 / 参与投票 / 查看结果」之后，点击蓝色按钮「<b>开始投票</b>」。页面内另有「咨询电话」，可随时查看。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="11_业主投票决议页底部_点击开始投票.webp?v=4">
@@ -847,6 +891,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">底部蓝色按钮「开始投票」</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">这一页比较长，<b>一直往下滑到底部</b>，看到蓝色按钮「开始投票」就点它。页面上还有「咨询电话」，可随时查看。</div>
+      </details>
     </article>
 
     <article class="step reveal">
@@ -854,7 +902,6 @@
         <span class="step-no">12</span>
         <h3 class="step-title">在「进行中」里选择你认可的物业企业</h3>
       </div>
-      <p class="step-desc">进入后是「业主投票决议」的<b>议题列表页</b>，上方有「<b>进行中</b>」和「<b>已结束</b>」两个页签。投票开放前，<b>「进行中」显示 0 项、页面写着「没有查询到记录」，这是正常的</b>。<b>9 月 15 日 10:00 以后</b>，本次议题就会出现在「进行中」页签下——<b>点开议题，选择你心仪的物业服务企业，按页面提示提交即可</b>。若届时仍查不到议题，列表上方有一行「如无法查询到您的投票议题，请点击这里」，点它按提示处理。</p>
       <div class="shot-box">
         <picture>
           <source type="image/webp" srcset="12_议题列表页_进行中0项暂无记录.webp?v=4">
@@ -863,6 +910,10 @@
         <span class="zoom-hint">点击放大</span>
       </div>
       <p class="shot-note">此图为开放前的状态：进行中 0 项、已结束 2 项</p>
+      <details class="step-more">
+        <summary>详细说明</summary>
+        <div class="body">两个页签：「<b>进行中</b>」和「<b>已结束</b>」。投票开放前「进行中」是 0 项，属正常；开放后本次议题会出现在这里——<b>点开它，选你认可的物业服务企业，按提示提交</b>。</div>
+      </details>
     </article>
 
   </div>
@@ -952,7 +1003,7 @@
 
   <footer class="foot">
     <p>
-      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v1.18</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
+      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v1.19</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
     </p>
   </footer>
 
