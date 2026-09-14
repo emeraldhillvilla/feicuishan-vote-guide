@@ -615,9 +615,12 @@
     .step,.panel,details.faq{box-shadow:none;border-color:#ccc;break-inside:avoid;}
     .reveal{opacity:1;transform:none;}
     .zoom-hint,.zoom{display:none !important;}
-    details.faq .body,details.step-more .body{display:block !important;}
+    /* 折叠内容不能靠 CSS 展开：实测把闭合 details 里的 .body 设为 display:block 后，
+       details 的总高度仍只有 24px，说明浏览器是用插槽机制隐藏内容的，作者样式覆盖不了。
+       所以改由页面底部脚本在 beforeprint 时统一设为 open。 */
     details.step-more summary{display:none;}
     details.faq summary::after{display:none;}
+    details.step-more summary::after{display:none;}
     .shot-box{max-width:230px;}
   }
 </style>
@@ -1003,7 +1006,7 @@
 
   <footer class="foot">
     <p>
-      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v1.19</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
+      本页由小区业主自行整理，仅在本小区业主范围内传阅，<b>不是政府或粤省事官方发布的文件</b>。截图采集于 <b>2026 年 9 月 14 日</b>（指引版本 <b>v1.20</b>），实际界面以粤省事当前显示为准。截图中的个人身份信息已作遮蔽处理，<b>红色方框与箭头为后加的操作指引标记</b>，非平台原有界面元素。
     </p>
   </footer>
 
@@ -1074,6 +1077,24 @@
     btn.addEventListener('click', close);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !box.hidden) { close(); }
+    });
+  })();
+
+  // 打印前把折叠内容全部展开，打完再恢复。
+  // 为什么必须用脚本：闭合的 details 是浏览器通过插槽机制隐藏内容的，
+  // 作者样式写 display:block !important 也不生效（实测 details 高度仍只有 24px）。
+  // 本页的「详细说明」和 FAQ 都默认折叠，不展开就会整段印不出来。
+  (function () {
+    var opened = [];
+    window.addEventListener('beforeprint', function () {
+      opened = [];
+      Array.prototype.forEach.call(document.querySelectorAll('details'), function (d) {
+        if (!d.open) { d.open = true; opened.push(d); }
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      Array.prototype.forEach.call(opened, function (d) { d.open = false; });
+      opened = [];
     });
   })();
 </script>
